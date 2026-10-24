@@ -1,0 +1,20 @@
+flowchart LR
+    subgraph APP["应用进程"]
+        A1["ArkTS sms.sendMessage"] --> A2["NAPI SendMessage"]
+        A2 --> A3["async_work 入队"]
+        A3 --> A4["SmsServiceManagerClient"]
+        A4 --> A5["SmsServiceProxy"]
+        A5 --> CB["SendCallback / DeliveryCallback"]
+    end
+    subgraph SVC["telephony 进程 · SA 4008"]
+        B1["SmsInterfaceStub"] --> B2["SmsService"]
+        B2 --> B3["SmsInterfaceManager"]
+        B3 --> B4["SmsSendManager"]
+        B4 --> B5["GsmSmsSender"]
+        B5 --> B6["SmsBaseMessage::SplitMessage"]
+        B5 --> B7["SmsSender 基类"]
+    end
+    A5 -->|"IPC TF_SYNC<br/>TEXT_BASED_SMS_DELIVERY"| B1
+    B7 -->|"OnSmsSendResult"| CB
+    B5 -->|"SendGsmSms"| RIL["core_service<br/>RIL 适配层"]
+    B2 -->|"DataShare 写入"| DB["短消息数据库"]

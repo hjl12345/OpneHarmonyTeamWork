@@ -1,0 +1,18 @@
+# 统一换行符，避免 Windows 与 macOS/Linux 之间产生整文件 diff
+* text=auto
+
+# 文本类：统一 LF
+*.md      text eol=lf
+*.mermaid text eol=lf
+*.mmd     text eol=lf
+*.py      text eol=lf
+*.json    text eol=lf
+*.txt     text eol=lf
+*.xml     text eol=lf
+
+# 二进制类：不做换行转换
+*.pptx    binary
+*.pdf     binary
+*.png     binary
+*.jpg     binary
+*.zip     binary

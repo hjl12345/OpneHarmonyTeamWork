@@ -1,0 +1,13 @@
+stateDiagram-v2
+    [*] --> Queued: SendCacheMapAddItem
+    Queued --> Waiting: SendGsmSms 已下发
+    Waiting --> Counting: 回执抵达 FindCacheMapAndTransform
+    Counting --> Counting: UpdateUnSentCellCount 未归零
+    Counting --> Done: unSentCellCount == 0
+    Waiting --> Retry: 错误码可重发且未超限
+    Retry --> Waiting: 延迟 2000ms 重投
+    Waiting --> Failed: 错误码不可重发或超限
+    Done --> ReportWait: 有 deliveryCallback
+    Done --> [*]
+    Failed --> [*]
+    ReportWait --> [*]: RADIO_SMS_STATUS 匹配 msgRef

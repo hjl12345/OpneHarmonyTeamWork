@@ -1,0 +1,7 @@
+bundle = student_kit
+course = 开源鸿蒙操作系统开发实践
+baseline = OpenHarmony-7.0-Release
+built = 2026-10-19
+tools = oh_slice.py, oh_trace.py, oh_verify.py, oh_level.py
+integrity = sha256sum -c SHA256SUMS
+notice = NOTICE.md

@@ -1,0 +1,27 @@
+{
+  "group": "G12",
+  "subsystem": "短信彩信（sms_mms）",
+  "topic": "一条短信的发送：收发/分片/报告主链路",
+  "members": [],
+  "tag": "OpenHarmony-7.0-Release",
+  "baseline_commit": "e06478b",
+  "repo": "telephony_sms_mms",
+  "source_path": "base/telephony/sms_mms",
+  "evidence": {
+    "anchors": 83,
+    "fail": 0,
+    "warn": 0,
+    "level": "L1",
+    "level_note": "纯静态分析，未上机取证，不主张 L2"
+  },
+  "slides": {
+    "status": "pending",
+    "script": "汇报脚本.md",
+    "note": "先按脚本套用学校模板，再导出 slides.pptx 与 slides.pdf"
+  },
+  "_todo": [
+    "group 与 members 需按教务分配的组号与真实姓名填写（当前 G12 与空数组成员为占位）",
+    "提交前确认组内基线 commit 与本文件一致",
+    "按 汇报脚本.md 套模板产出 slides.pptx / slides.pdf"
+  ]
+}

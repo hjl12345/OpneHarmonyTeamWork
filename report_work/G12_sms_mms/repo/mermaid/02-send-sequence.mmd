@@ -1,0 +1,22 @@
+sequenceDiagram
+    participant App as 应用进程
+    participant Stub as SmsInterfaceStub
+    participant Svc as SmsService
+    participant IM as SmsInterfaceManager
+    participant SM as SmsSendManager
+    participant GS as GsmSmsSender
+    participant RIL as core_service / IMS
+    App->>Stub: IPC TF_SYNC TEXT_BASED_SMS_DELIVERY
+    Stub->>Svc: SendMessage（卡槽校验后）
+    Svc->>Svc: 策略 → 权限 → 地址正则
+    Svc->>Svc: InsertSessionAndDetail 得到 dataId
+    Svc->>IM: TextBasedSmsDelivery
+    IM->>SM: TextBasedSmsDelivery
+    SM->>GS: 按 GetNetWorkType 分流
+    GS->>GS: SplitMessage → 逐段 SetHeaderConcat
+    GS->>RIL: SendGsmSms / ImsSendMessage（每段一次）
+    RIL-->>GS: RADIO_SEND_SMS 回执（每段一次）
+    GS->>GS: UpdateUnSentCellCount 递减
+    GS-->>App: 计数归零后 OnSmsSendResult
+    RIL-->>GS: RADIO_SMS_STATUS
+    GS-->>App: OnSmsDeliveryResult
