@@ -1,0 +1,52 @@
+2026-10-24 16:14:54.899 [INFO] repro=split_message algorithm-level port (NOT device log)
+2026-10-24 16:14:54.899 [INFO] source_root=D:\开源鸿蒙相关\.cache\sms_mms_7.0
+2026-10-24 16:14:54.899 [INFO] const MAX_GSM_7BIT_DATA_LEN  = 160  <- services/sms/sms_base_message.cpp
+2026-10-24 16:14:54.899 [INFO] const MAX_UCS2_DATA_LEN      = 140  <- services/sms/sms_base_message.cpp
+2026-10-24 16:14:54.899 [INFO] const multiSegSms7BitLength  = 153  <- services/sms/sms_base_message.cpp
+2026-10-24 16:14:54.899 [INFO] const multiSegSmsUcs2Length  = 134  <- services/sms/sms_base_message.cpp
+2026-10-24 16:14:54.899 [INFO] const MAX_SEGMENT_NUM        = 15   <- services/sms/include/gsm/gsm_pdu_code_type.h
+2026-10-24 16:14:54.899 [INFO] const PORT_HEADER_LEN        = 6    <- services/sms/sms_base_message.cpp
+2026-10-24 16:14:54.899 [INFO] const LANG_HEADER_LEN        = 3    <- services/sms/sms_base_message.cpp
+
+2026-10-24 16:14:54.899 [INFO] case A0  空字符串（encodeLen<=0 提前返回）            chars=0    -> 不产生分段（encodeLen<=0，SplitMessage 提前返回）
+2026-10-24 16:14:54.899 [INFO] case A  18 个汉字                             chars=18    coding=UCS2 encodeLen=36   maxSize=140  segSize=36   est=1  actual=1 
+2026-10-24 16:14:54.899 [INFO]         sizes=[36]
+2026-10-24 16:14:54.899 [INFO] case B  67 个汉字                             chars=67    coding=UCS2 encodeLen=134  maxSize=140  segSize=134  est=1  actual=1 
+2026-10-24 16:14:54.899 [INFO]         sizes=[134]
+2026-10-24 16:14:54.899 [INFO] case C  70 个汉字（=140 字节）                    chars=70    coding=UCS2 encodeLen=140  maxSize=140  segSize=140  est=1  actual=1 
+2026-10-24 16:14:54.899 [INFO]         sizes=[140]
+2026-10-24 16:14:54.899 [INFO] case D  71 个汉字（=142 字节）                    chars=71    coding=UCS2 encodeLen=142  maxSize=140  segSize=134  est=2  actual=2 
+2026-10-24 16:14:54.899 [INFO]         sizes=[134, 8]
+2026-10-24 16:14:54.899 [INFO] case E  100 个汉字（=200 字节）                   chars=100   coding=UCS2 encodeLen=200  maxSize=140  segSize=134  est=2  actual=2 
+2026-10-24 16:14:54.899 [INFO]         sizes=[134, 66]
+2026-10-24 16:14:54.899 [INFO] case F  100 个 ASCII                        chars=100   coding=7BIT encodeLen=100  maxSize=160  segSize=100  est=1  actual=1 
+2026-10-24 16:14:54.899 [INFO]         sizes=[100]
+2026-10-24 16:14:54.899 [INFO] case G  160 个 ASCII（=160 septet）           chars=160   coding=7BIT encodeLen=160  maxSize=160  segSize=160  est=1  actual=1 
+2026-10-24 16:14:54.899 [INFO]         sizes=[160]
+2026-10-24 16:14:54.899 [INFO] case H  161 个 ASCII                        chars=161   coding=7BIT encodeLen=161  maxSize=160  segSize=153  est=2  actual=2 
+2026-10-24 16:14:54.899 [INFO]         sizes=[153, 8]
+2026-10-24 16:14:54.899 [INFO] case I  100 个 emoji（代理对，400 字节）            chars=100   coding=UCS2 encodeLen=400  maxSize=140  segSize=134  est=3  actual=4 
+2026-10-24 16:14:54.899 [INFO]         sizes=[132, 132, 132, 4]
+2026-10-24 16:14:54.899 [INFO] case J  100 个汉字 + 端口号头（6 字节）               chars=100   coding=UCS2 encodeLen=200  maxSize=140  segSize=134  est=2  actual=2 
+2026-10-24 16:14:54.899 [INFO]         sizes=[134, 66]
+2026-10-24 16:14:54.899 [INFO] case K  70 个汉字 + 端口号头                      chars=70    coding=UCS2 encodeLen=140  maxSize=140  segSize=134  est=2  actual=2 
+2026-10-24 16:14:54.899 [INFO]         sizes=[134, 6]
+2026-10-24 16:14:54.901 [INFO] case L  3000 个汉字（撞 2401 字节缓冲上限）            chars=3000  coding=UCS2 encodeLen=2401 maxSize=140  segSize=134  est=18 actual=18  <TRUNCATED 6000->2401, lost 1 bytes>
+2026-10-24 16:14:54.901 [INFO]         sizes=[134, 134, 134, 134, 134, '...', 122]  <EXCEED 15>
+
+2026-10-24 16:14:54.901 [INFO] == 不变量自检（段长上界 / 总和一致 / UCS2 不劈码元）==
+2026-10-24 16:14:54.901 [INFO] [PASS] 共 13 个用例，其中 12 个产生分段，全部满足不变量（空串用例不产生分段）
+
+2026-10-24 16:14:54.901 [INFO] == 与报告/汇报脚本的断言对账 ==
+2026-10-24 16:14:54.901 [INFO] [PASS] 18 个汉字一条发完（用例 A）
+2026-10-24 16:14:54.901 [INFO] [PASS] 100 个汉字切成 67+33（134 字节 + 66 字节）（用例 E）
+2026-10-24 16:14:54.901 [INFO] [PASS] 100 个 ASCII 一条发完（用例 F）
+2026-10-24 16:14:54.901 [INFO] [PASS] 多段 UCS2 每段不超过 134 字节（用例 E）
+2026-10-24 16:14:54.901 [INFO] [PASS] 3000 个汉字超过 15 段，被判失败（用例 L）
+
+2026-10-24 16:14:54.901 [INFO] == 复现得出的三个关键结论 ==
+2026-10-24 16:14:54.901 [INFO] 1) UCS2 单条阈值 = 140 字节（70 汉字仍一条），142 字节才开始分 -> 阈值是 140 不是 134
+2026-10-24 16:14:54.901 [INFO] 2) emoji 用例：ceil 估算 3 段，实际切出 4 段（字符边界回退会让段数变多），每段 [132, 132, 132, 4] 字节，均未劈开代理对
+2026-10-24 16:14:54.901 [INFO] 3) 3000 汉字 encodeLen 本应 6000 字节，被 2401 字节缓冲截到 2401 -> 18 段 > 上限 15，发送侧判失败；且 UCS2 下 2401 为奇数，整数除法后丢掉 1 字节
+
+2026-10-24 16:14:54.901 [INFO] summary cases=13 claims_pass=True invariants_pass=True

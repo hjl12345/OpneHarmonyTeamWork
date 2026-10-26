@@ -5,7 +5,7 @@ sequenceDiagram
     participant IM as SmsInterfaceManager
     participant SM as SmsSendManager
     participant GS as GsmSmsSender
-    participant RIL as core_service / IMS
+    participant RIL as core_service API（同进程）/ IMS
     App->>Stub: IPC TF_SYNC TEXT_BASED_SMS_DELIVERY
     Stub->>Svc: SendMessage（卡槽校验后）
     Svc->>Svc: 策略 → 权限 → 地址正则

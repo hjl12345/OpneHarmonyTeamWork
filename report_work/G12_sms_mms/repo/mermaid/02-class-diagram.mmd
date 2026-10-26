@@ -1,0 +1,32 @@
+classDiagram
+    class SystemAbility
+    class TelEventHandler
+    class ISmsServiceInterface
+    class SmsInterfaceStub
+    class SmsServiceProxy
+    class SmsService
+    class SmsInterfaceManager
+    class SmsSendManager
+    class SmsSender
+    class GsmSmsSender
+    class CdmaSmsSender
+    class SmsBaseMessage
+    class GsmSmsMessage
+    class SmsSendIndexer
+
+    SystemAbility <|-- SmsService : SA 生命周期
+    ISmsServiceInterface <|.. SmsInterfaceStub : 桩实现
+    SmsInterfaceStub <|-- SmsService : 同一个对象
+    ISmsServiceInterface <|.. SmsServiceProxy : 客户端代理
+    TelEventHandler <|-- SmsSender : 事件驱动
+    SmsSender <|-- GsmSmsSender
+    SmsSender <|-- CdmaSmsSender
+    SmsBaseMessage <|-- GsmSmsMessage
+
+    SmsService --> SmsInterfaceManager : 按 slotId
+    SmsInterfaceManager --> SmsSendManager
+    SmsSendManager --> SmsSender : 按制式选
+    SmsSender --> SmsSendIndexer : 每段一个
+    SmsSender --> SmsBaseMessage : 先编码再切
+    GsmSmsSender --> GsmSmsMessage
+    SmsSendIndexer ..> SmsSender : 回执回灌

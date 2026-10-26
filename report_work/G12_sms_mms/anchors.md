@@ -3,6 +3,8 @@
 > 基线 `OpenHarmony-7.0-Release`（commit `e06478b`） ｜ 切片根：`telephony_sms_mms`
 > 本清单与正文一一对应，可单独作为校验输入批量复跑（工具用法见课程工具包 README）。
 > 全部锚点相对**切片根**书写，行号指向函数签名行或该行附近真实出现的符号。
+>
+> **口径说明**：本清单是**精选清单**（103 条，每条结论取一个代表锚点），不是全集。第六轮"知识库交叉验证"新增的锚点（SA 4010 启动依赖、接收侧 int8_t 计数、拆分侧"上限 + 1"、8 位 msgRef、IMS 代理获取、HiSysEvent 入口）记在报告第 4.6 节与汇报脚本第 7.8、8.10 节，未并入本清单，以免打乱各处引用的 103 口径。
 
 ## 0. 子系统身份
 
@@ -10,8 +12,32 @@
 |---|---|
 | `sa_profile/4008.json:2#process` | 运行进程名为 `telephony` |
 | `sa_profile/4008.json:6#libpath` | SA 4008 的产物是 `libtel_sms_mms.z.so` |
-| `sa_profile/4008.json:9#depend_time_out` | 对 SA 4010 的依赖等待上限 60000 ms |
+| `sa_profile/4008.json:11#depend_time_out` | 对 SA 4010 的依赖等待上限 60000 ms |
 | `services/sms/include/sms_service.h:30#SmsService` | 一个类同时继承 `SystemAbility` 与 `SmsInterfaceStub` |
+
+### 0.1 静态结构（类与职责，对应正文 1.5）
+
+| 锚点 | 证明什么 |
+|---|---|
+| `interfaces/innerkits/i_sms_service_interface.h:26#ISmsServiceInterface` | 客户端与服务端的共同契约，双方都只依赖它 |
+| `interfaces/innerkits/sms_service_proxy.h:27#SmsServiceProxy` | 应用侧代理，继承 `IRemoteProxy` |
+| `services/sms/include/sms_interface_stub.h:34#SmsInterfaceStub` | 服务侧桩，继承 `IRemoteStub`，只做协议层 |
+| `services/sms/include/sms_interface_manager.h:36#SmsInterfaceManager` | 卡槽级门面，按 `slotId` 路由 |
+| `services/sms/include/sms_send_manager.h:31#SmsSendManager` | 卡槽级调度，按制式选发送器 |
+| `services/sms/include/sms_sender.h:40#SmsSender` | 发送器抽象基类，同时继承 `TelEventHandler`（事件驱动） |
+| `services/sms/include/sms_sender.h:53#SendSmsToRil` | 基类纯虚函数之一：只声明"怎么发一段" |
+| `services/sms/include/sms_sender.h:59#IsImsSmsSupported` | 基类纯虚函数之一：制式能力查询 |
+| `services/sms/include/gsm/gsm_sms_sender.h:34#GsmSmsSender` | GSM 制式实现 |
+| `services/sms/include/cdma/cdma_sms_sender.h:28#CdmaSmsSender` | CDMA 制式实现（同构第二份） |
+| `services/sms/include/sms_base_message.h:64#SmsBaseMessage` | 消息模型基类：段长计算与分片 |
+| `services/sms/include/gsm/gsm_sms_message.h:24#GsmSmsMessage` | GSM 消息模型：编码选择与 TPDU |
+| `services/sms/include/sms_send_indexer.h:28#SmsSendIndexer` | 在途事务对象，每段一个 |
+| `services/sms/include/sms_send_indexer.h:65#SetUnSentCellCount` | 剩余计数按值传递（**不是共享指针**） |
+| `services/sms/include/sms_send_indexer.h:67#SetHasCellFailed` | 失败标志按 `shared_ptr<bool>` 共享 |
+
+> `SmsService` 同时继承 `SystemAbility` 与 `SmsInterfaceStub`，锚点已列在上一节。
+
+---
 
 ## 1. 第 1 跳 · 应用侧（NAPI）
 
@@ -81,8 +107,10 @@
 |---|---|
 | `services/sms/gsm/gsm_sms_sender.cpp:179#SendSmsToRil` | 每段的最终出口 |
 | `services/sms/gsm/gsm_sms_sender.cpp:200#SendCacheMapAddItem` | 索引器进入进程内静态缓存表 |
-| `services/sms/gsm/gsm_sms_sender.cpp:219#sendCsSMS` | 域判定：非 IMS 域 / 能力关闭 / 重发超限 → CS |
+| `services/sms/gsm/gsm_sms_sender.cpp:218#sendCsSMS` | 域判定：非 IMS 域 / 能力关闭 / 重发超限 → CS |
 | `services/sms/gsm/gsm_sms_sender.cpp:242#SendGsmSms` | CS 域走 `CoreManagerInner` |
+| `services/sms/gsm/gsm_sms_sender.cpp:242#CoreManagerInner` | 直接调单例，**没有 SA 查找** → RIL 这一跳同进程 |
+| `BUILD.gn:137#tel_core_service_api` | 构建期链接 `core_service` 的 api 库，佐证同进程 |
 | `services/sms/gsm/gsm_sms_sender.cpp:266#SendImsSms` | IMS 域走 `ImsSmsClient` |
 
 ## 8. 第 8 跳 · 回执聚合与状态回写
@@ -115,18 +143,21 @@
 | `services/sms/sms_base_message.cpp:287#GetSegmentSize` | 用"数据长度 + 头部长度"与单条上限比较 |
 | `services/sms/sms_base_message.cpp:312#maxSize` | 超过上限才降为多段长度 |
 | `services/sms/sms_base_message.cpp:290#multiSegSms7BitLength` | 多段 7bit 每段 153 字节 |
-| `services/sms/sms_base_message.cpp:291#multiSegSmsUcs2Length` | 多段 UCS2 每段 134 字节 |
+| `services/sms/sms_base_message.cpp:35#MAX_GSM_7BIT_DATA_LEN` | 单条上限 160（7bit，单位是 septet） |
+| `services/sms/sms_base_message.cpp:36#MAX_UCS2_DATA_LEN` | 单条上限 140 字节（UCS2）——**这才是分片阈值** |
+| `services/sms/sms_base_message.cpp:291#multiSegSmsUcs2Length` | 分片后每段 134 字节，不是阈值 |
 | `services/sms/sms_base_message.cpp:511#segCount` | 段数取上整，只有末段取余数 |
-| `services/sms/sms_base_message.cpp:518#SplitMessageUcs2` | UCS2 多段单独处理，避免劈开代理对 |
+| `services/sms/sms_base_message.cpp:414#SplitMessageUcs2` | UCS2 多段单独处理，避免劈开代理对 |
+| `services/sms/sms_base_message.cpp:595#FindNextUnicodePosition` | 边界回退：实际段数可能多于 ceil 估算 |
 | `services/sms/include/gsm/gsm_pdu_code_type.h:27#MAX_SEGMENT_NUM` | 段数上限 15 |
 
 ### 9.2 多段聚合
 
 | 锚点 | 证明什么 |
 |---|---|
-| `services/sms/gsm/gsm_sms_sender.cpp:86#unSentCellCount` | 剩余段计数由整批分段共享 |
-| `services/sms/gsm/gsm_sms_sender.cpp:87#hasCellFailed` | 失败标志同样共享 |
-| `services/sms/gsm/gsm_sms_sender.cpp:150#SetUnSentCellCount` | 每个索引器挂同一份计数与标志 |
+| `services/sms/gsm/gsm_sms_sender.cpp:86#unSentCellCount` | 计数初值 = 本批段数；注意它是 `shared_ptr`，但写进索引器时被解引用成值 |
+| `services/sms/gsm/gsm_sms_sender.cpp:87#hasCellFailed` | 失败标志是 `shared_ptr<bool>`，整批真正共享 |
+| `services/sms/gsm/gsm_sms_sender.cpp:150#SetUnSentCellCount` | 计数按值传入（每段一份副本），标志按 `shared_ptr` 共享 |
 
 ### 9.3 重发与限流
 

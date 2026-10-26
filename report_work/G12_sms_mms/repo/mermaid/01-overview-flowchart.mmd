@@ -13,8 +13,8 @@ flowchart LR
         B4 --> B5["GsmSmsSender"]
         B5 --> B6["SmsBaseMessage::SplitMessage"]
         B5 --> B7["SmsSender 基类"]
+        B5 --> RIL["core_service API<br/>（同进程库）"]
     end
     A5 -->|"IPC TF_SYNC<br/>TEXT_BASED_SMS_DELIVERY"| B1
     B7 -->|"OnSmsSendResult"| CB
-    B5 -->|"SendGsmSms"| RIL["core_service<br/>RIL 适配层"]
     B2 -->|"DataShare 写入"| DB["短消息数据库"]

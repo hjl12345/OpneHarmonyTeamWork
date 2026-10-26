@@ -1,178 +1,27 @@
-# oh_verify.py 校验输出（report.md）
-# 生成时间：2026-10-24 13:47:13
+# oh_verify.py 校验输出（report.md / anchors.md / 汇报脚本.md）
+# 生成时间：2026-10-24 16:43:31
 # 源码根：.cache/sms_mms_7.0（OpenHarmony-7.0-Release / e06478b）
-# 命令：python scripts/oh_verify.py --root <切片> --input report.md
 
-[OK]   bundle.json                                                  仅校验文件存在
-[OK]   sa_profile/4008.json:2#process                               文件、行号、符号均有效（process 出现在 ±5 行内）
-[OK]   sa_profile/4008.json:6#libpath                               文件、行号、符号均有效（libpath 出现在 ±5 行内）
-[OK]   sa_profile/4008.json:9#depend_time_out                       文件、行号、符号均有效（depend_time_out 出现在 ±5 行内）
-[OK]   services/sms/include/sms_service.h:30#SmsService             文件、行号、符号均有效（SmsService 出现在 ±5 行内）
-[OK]   services/sms/sms_persist_helper.cpp                          仅校验文件存在
-[OK]   services/sms/sms_base_message.cpp:478#SplitMessage           文件、行号、符号均有效（SplitMessage 出现在 ±5 行内）
-[OK]   services/sms/sms_base_message.cpp:290#multiSegSms7BitLength  文件、行号、符号均有效（multiSegSms7BitLength 出现在 ±5 行内）
-[OK]   frameworks/js/napi/src/napi_sms.cpp:262#SendMessage          文件、行号、符号均有效（SendMessage 出现在 ±5 行内）
-[OK]   frameworks/js/napi/src/napi_sms.cpp:286#napi_create_async_work 文件、行号、符号均有效（napi_create_async_work 出现在 ±5 行内）
-[OK]   frameworks/js/napi/src/napi_sms.cpp:156#NativeSendMessage    文件、行号、符号均有效（NativeSendMessage 出现在 ±5 行内）
-[OK]   frameworks/js/napi/src/napi_sms.cpp:78#ActuallySendTextMessage 文件、行号、符号均有效（ActuallySendTextMessage 出现在 ±5 行内）
-[OK]   frameworks/native/sms/src/sms_service_manager_client.cpp:98#SendMessage 文件、行号、符号均有效（SendMessage 出现在 ±5 行内）
-[OK]   frameworks/native/sms/src/sms_service_proxy.cpp:33#SendMessage 文件、行号、符号均有效（SendMessage 出现在 ±5 行内）
-[OK]   frameworks/native/sms/src/sms_service_proxy.cpp:41#WriteInterfaceToken 文件、行号、符号均有效（WriteInterfaceToken 出现在 ±5 行内）
-[OK]   frameworks/native/sms/src/sms_service_proxy.cpp:51#WriteRemoteObject 文件、行号、符号均有效（WriteRemoteObject 出现在 ±5 行内）
-[OK]   frameworks/native/sms/src/sms_service_proxy.cpp:65#SendRequest 文件、行号、符号均有效（SendRequest 出现在 ±5 行内）
-[OK]   interfaces/innerkits/sms_service_ipc_interface_code.h:26#TEXT_BASED_SMS_DELIVERY 文件、行号、符号均有效（TEXT_BASED_SMS_DELIVERY 出现在 ±5 行内）
-[OK]   services/sms/sms_interface_stub.cpp:38#TEXT_BASED_SMS_DELIVERY 文件、行号、符号均有效（TEXT_BASED_SMS_DELIVERY 出现在 ±5 行内）
-[OK]   services/sms/sms_interface_stub.cpp:161#OnSendSmsTextRequest 文件、行号、符号均有效（OnSendSmsTextRequest 出现在 ±5 行内）
-[OK]   services/sms/sms_interface_stub.cpp:169#IsValidSlotId        文件、行号、符号均有效（IsValidSlotId 出现在 ±5 行内）
-[OK]   services/sms/sms_interface_stub.cpp:186#RemoveSpacesInDesAddr 文件、行号、符号均有效（RemoveSpacesInDesAddr 出现在 ±5 行内）
-[OK]   services/sms/sms_service.cpp:150#IsSmsPolicyDisable          文件、行号、符号均有效（IsSmsPolicyDisable 出现在 ±5 行内）
-[OK]   services/sms/sms_service.cpp:155#CheckSmsPermission          文件、行号、符号均有效（CheckSmsPermission 出现在 ±5 行内）
-[OK]   services/sms/sms_service.cpp:173#ValidDestinationAddress     文件、行号、符号均有效（ValidDestinationAddress 出现在 ±5 行内）
-[OK]   services/sms/sms_service.cpp:181#InsertSessionAndDetail      文件、行号、符号均有效（InsertSessionAndDetail 出现在 ±5 行内）
-[OK]   services/sms/sms_service.cpp:193#TextBasedSmsDelivery        文件、行号、符号均有效（TextBasedSmsDelivery 出现在 ±5 行内）
-[OK]   services/sms/sms_interface_manager.cpp:68#TextBasedSmsDelivery 文件、行号、符号均有效（TextBasedSmsDelivery 出现在 ±5 行内）
-[OK]   services/sms/sms_interface_manager.cpp:86#smsSendManager_    文件、行号、符号均有效（smsSendManager_ 出现在 ±5 行内）
-[OK]   services/sms/sms_send_manager.cpp:103#TextBasedSmsDelivery   文件、行号、符号均有效（TextBasedSmsDelivery 出现在 ±5 行内）
-[OK]   services/sms/sms_send_manager.cpp:123#GetNetWorkType         文件、行号、符号均有效（GetNetWorkType 出现在 ±5 行内）
-[OK]   services/sms/sms_send_manager.cpp:125#NET_TYPE_GSM           文件、行号、符号均有效（NET_TYPE_GSM 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:45#TextBasedSmsDelivery  文件、行号、符号均有效（TextBasedSmsDelivery 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:54#SplitMessage          文件、行号、符号均有效（SplitMessage 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:57#CreateDefaultSubmitSmsTpdu 文件、行号、符号均有效（CreateDefaultSubmitSmsTpdu 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:63#MAX_SEGMENT_NUM       文件、行号、符号均有效（MAX_SEGMENT_NUM 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:74#TextBasedSmsSplitDelivery 文件、行号、符号均有效（TextBasedSmsSplitDelivery 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:99#SmsSendIndexer        文件、行号、符号均有效（SmsSendIndexer 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:126#SetHeaderConcat      文件、行号、符号均有效（SetHeaderConcat 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:138#bStatusReport        文件、行号、符号均有效（bStatusReport 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:179#SendSmsToRil         文件、行号、符号均有效（SendSmsToRil 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:200#SendCacheMapAddItem  文件、行号、符号均有效（SendCacheMapAddItem 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:219#sendCsSMS            文件、行号、符号均有效（sendCsSMS 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:242#SendGsmSms           文件、行号、符号均有效（SendGsmSms 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:266#SendImsSms           文件、行号、符号均有效（SendImsSms 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:43#ProcessEvent                  文件、行号、符号均有效（ProcessEvent 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:274#FindCacheMapAndTransform     文件、行号、符号均有效（FindCacheMapAndTransform 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:323#UpdateUnSentCellCount        文件、行号、符号均有效（UpdateUnSentCellCount 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:96#HandleMessageResponse         文件、行号、符号均有效（HandleMessageResponse 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:361#HandleResend                 文件、行号、符号均有效（HandleResend 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:120#SendMessageSucceed           文件、行号、符号均有效（SendMessageSucceed 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:129#unSentCellCount              文件、行号、符号均有效（unSentCellCount 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:138#GetHasCellFailed             文件、行号、符号均有效（GetHasCellFailed 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:153#UpdateSms                    文件、行号、符号均有效（UpdateSms 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:161#SendBroadcast                文件、行号、符号均有效（SendBroadcast 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:306#StatusReportAnalysis 文件、行号、符号均有效（StatusReportAnalysis 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:330#GetMsgRef            文件、行号、符号均有效（GetMsgRef 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:346#SendSmsAck           文件、行号、符号均有效（SendSmsAck 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:350#OnSmsDeliveryResult  文件、行号、符号均有效（OnSmsDeliveryResult 出现在 ±5 行内）
-[OK]   services/sms/sms_base_message.cpp:501#DecodeMessage          文件、行号、符号均有效（DecodeMessage 出现在 ±5 行内）
-[OK]   services/sms/sms_base_message.cpp:287#GetSegmentSize         文件、行号、符号均有效（GetSegmentSize 出现在 ±5 行内）
-[OK]   services/sms/sms_base_message.cpp:312#maxSize                文件、行号、符号均有效（maxSize 出现在 ±5 行内）
-[OK]   services/sms/sms_base_message.cpp:291#multiSegSmsUcs2Length  文件、行号、符号均有效（multiSegSmsUcs2Length 出现在 ±5 行内）
-[OK]   services/sms/sms_base_message.cpp:511#segCount               文件、行号、符号均有效（segCount 出现在 ±5 行内）
-[OK]   services/sms/sms_base_message.cpp:518#SplitMessageUcs2       文件、行号、符号均有效（SplitMessageUcs2 出现在 ±5 行内）
-[OK]   services/sms/include/gsm/gsm_pdu_code_type.h:27#MAX_SEGMENT_NUM 文件、行号、符号均有效（MAX_SEGMENT_NUM 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:86#unSentCellCount       文件、行号、符号均有效（unSentCellCount 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:87#hasCellFailed         文件、行号、符号均有效（hasCellFailed 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:150#SetUnSentCellCount   文件、行号、符号均有效（SetUnSentCellCount 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:383#MSG_SMS_RETRY_DELIVERY       文件、行号、符号均有效（MSG_SMS_RETRY_DELIVERY 出现在 ±5 行内）
-[OK]   services/sms/include/sms_sender.h:111#MAX_SEND_RETRIES       文件、行号、符号均有效（MAX_SEND_RETRIES 出现在 ±5 行内）
-[OK]   services/sms/include/sms_sender.h:112#INITIAL_COUNT          文件、行号、符号均有效（INITIAL_COUNT 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:134#SetPsResendCount             文件、行号、符号均有效（SetPsResendCount 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:35#sendCacheMap_                 文件、行号、符号均有效（sendCacheMap_ 出现在 ±5 行内）
-[OK]   frameworks/js/napi/include/send_callback.h:31#SendCallback   文件、行号、符号均有效（SendCallback 出现在 ±5 行内）
-[OK]   services/sms/include/sms_sender.h:45#TextBasedSmsDelivery    文件、行号、符号均有效（TextBasedSmsDelivery 出现在 ±5 行内）
-[OK]   services/sms/include/sms_sender.h:123#MAX_REPORT_LIST_LIMIT  文件、行号、符号均有效（MAX_REPORT_LIST_LIMIT 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:298#UpdateUnSentCellCount        文件、行号、符号均有效（UpdateUnSentCellCount 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:242#EXPIRED_TIME                 文件、行号、符号均有效（EXPIRED_TIME 出现在 ±5 行内）
-[OK]   services/sms/include/sms_sender.h:120#EXPIRED_TIME           文件、行号、符号均有效（EXPIRED_TIME 出现在 ±5 行内）
-[WARN] report.md                                                    无目录前缀且源码树中不存在，按「非源码锚点」处理（命令/文件名？）
-[OK]   services/sms/sms_service.cpp                                 仅校验文件存在
-[OK]   services/sms/sms_sender.cpp                                  仅校验文件存在
-[OK]   services/sms/sms_interface_stub.cpp                          仅校验文件存在
+===== report.md =====
+汇总：共 112 个锚点，通过 111，告警 1，失败 0
 
-汇总：共 84 个锚点，通过 83，告警 1，失败 0
+===== anchors.md =====
+汇总：共 103 个锚点，通过 103，告警 0，失败 0
 
-# ---- 锚点清单 ----
-[OK]   sa_profile/4008.json:2#process                               文件、行号、符号均有效（process 出现在 ±5 行内）
-[OK]   sa_profile/4008.json:6#libpath                               文件、行号、符号均有效（libpath 出现在 ±5 行内）
-[OK]   sa_profile/4008.json:9#depend_time_out                       文件、行号、符号均有效（depend_time_out 出现在 ±5 行内）
-[OK]   services/sms/include/sms_service.h:30#SmsService             文件、行号、符号均有效（SmsService 出现在 ±5 行内）
-[OK]   frameworks/js/napi/src/napi_sms.cpp:262#SendMessage          文件、行号、符号均有效（SendMessage 出现在 ±5 行内）
-[OK]   frameworks/js/napi/src/napi_sms.cpp:286#napi_create_async_work 文件、行号、符号均有效（napi_create_async_work 出现在 ±5 行内）
-[OK]   frameworks/js/napi/src/napi_sms.cpp:156#NativeSendMessage    文件、行号、符号均有效（NativeSendMessage 出现在 ±5 行内）
-[OK]   frameworks/js/napi/src/napi_sms.cpp:78#ActuallySendTextMessage 文件、行号、符号均有效（ActuallySendTextMessage 出现在 ±5 行内）
-[OK]   frameworks/native/sms/src/sms_service_manager_client.cpp:98#SendMessage 文件、行号、符号均有效（SendMessage 出现在 ±5 行内）
-[OK]   frameworks/native/sms/src/sms_service_proxy.cpp:33#SendMessage 文件、行号、符号均有效（SendMessage 出现在 ±5 行内）
-[OK]   frameworks/native/sms/src/sms_service_proxy.cpp:41#WriteInterfaceToken 文件、行号、符号均有效（WriteInterfaceToken 出现在 ±5 行内）
-[OK]   frameworks/native/sms/src/sms_service_proxy.cpp:51#WriteRemoteObject 文件、行号、符号均有效（WriteRemoteObject 出现在 ±5 行内）
-[OK]   frameworks/native/sms/src/sms_service_proxy.cpp:65#SendRequest 文件、行号、符号均有效（SendRequest 出现在 ±5 行内）
-[OK]   interfaces/innerkits/sms_service_ipc_interface_code.h:26#TEXT_BASED_SMS_DELIVERY 文件、行号、符号均有效（TEXT_BASED_SMS_DELIVERY 出现在 ±5 行内）
-[OK]   services/sms/sms_interface_stub.cpp:38#TEXT_BASED_SMS_DELIVERY 文件、行号、符号均有效（TEXT_BASED_SMS_DELIVERY 出现在 ±5 行内）
-[OK]   services/sms/sms_interface_stub.cpp:161#OnSendSmsTextRequest 文件、行号、符号均有效（OnSendSmsTextRequest 出现在 ±5 行内）
-[OK]   services/sms/sms_interface_stub.cpp:169#IsValidSlotId        文件、行号、符号均有效（IsValidSlotId 出现在 ±5 行内）
-[OK]   services/sms/sms_interface_stub.cpp:186#RemoveSpacesInDesAddr 文件、行号、符号均有效（RemoveSpacesInDesAddr 出现在 ±5 行内）
-[OK]   services/sms/sms_service.cpp:150#IsSmsPolicyDisable          文件、行号、符号均有效（IsSmsPolicyDisable 出现在 ±5 行内）
-[OK]   services/sms/sms_service.cpp:155#CheckSmsPermission          文件、行号、符号均有效（CheckSmsPermission 出现在 ±5 行内）
-[OK]   services/sms/sms_service.cpp:173#ValidDestinationAddress     文件、行号、符号均有效（ValidDestinationAddress 出现在 ±5 行内）
-[OK]   services/sms/sms_service.cpp:181#InsertSessionAndDetail      文件、行号、符号均有效（InsertSessionAndDetail 出现在 ±5 行内）
-[OK]   services/sms/sms_service.cpp:193#TextBasedSmsDelivery        文件、行号、符号均有效（TextBasedSmsDelivery 出现在 ±5 行内）
-[OK]   services/sms/sms_interface_manager.cpp:68#TextBasedSmsDelivery 文件、行号、符号均有效（TextBasedSmsDelivery 出现在 ±5 行内）
-[OK]   services/sms/sms_interface_manager.cpp:86#smsSendManager_    文件、行号、符号均有效（smsSendManager_ 出现在 ±5 行内）
-[OK]   services/sms/sms_send_manager.cpp:103#TextBasedSmsDelivery   文件、行号、符号均有效（TextBasedSmsDelivery 出现在 ±5 行内）
-[OK]   services/sms/sms_send_manager.cpp:123#GetNetWorkType         文件、行号、符号均有效（GetNetWorkType 出现在 ±5 行内）
-[OK]   services/sms/sms_send_manager.cpp:125#NET_TYPE_GSM           文件、行号、符号均有效（NET_TYPE_GSM 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:45#TextBasedSmsDelivery  文件、行号、符号均有效（TextBasedSmsDelivery 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:54#SplitMessage          文件、行号、符号均有效（SplitMessage 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:57#CreateDefaultSubmitSmsTpdu 文件、行号、符号均有效（CreateDefaultSubmitSmsTpdu 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:63#MAX_SEGMENT_NUM       文件、行号、符号均有效（MAX_SEGMENT_NUM 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:74#TextBasedSmsSplitDelivery 文件、行号、符号均有效（TextBasedSmsSplitDelivery 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:99#SmsSendIndexer        文件、行号、符号均有效（SmsSendIndexer 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:126#SetHeaderConcat      文件、行号、符号均有效（SetHeaderConcat 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:138#bStatusReport        文件、行号、符号均有效（bStatusReport 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:179#SendSmsToRil         文件、行号、符号均有效（SendSmsToRil 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:200#SendCacheMapAddItem  文件、行号、符号均有效（SendCacheMapAddItem 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:219#sendCsSMS            文件、行号、符号均有效（sendCsSMS 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:242#SendGsmSms           文件、行号、符号均有效（SendGsmSms 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:266#SendImsSms           文件、行号、符号均有效（SendImsSms 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:43#ProcessEvent                  文件、行号、符号均有效（ProcessEvent 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:274#FindCacheMapAndTransform     文件、行号、符号均有效（FindCacheMapAndTransform 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:323#UpdateUnSentCellCount        文件、行号、符号均有效（UpdateUnSentCellCount 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:96#HandleMessageResponse         文件、行号、符号均有效（HandleMessageResponse 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:361#HandleResend                 文件、行号、符号均有效（HandleResend 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:120#SendMessageSucceed           文件、行号、符号均有效（SendMessageSucceed 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:129#unSentCellCount              文件、行号、符号均有效（unSentCellCount 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:138#GetHasCellFailed             文件、行号、符号均有效（GetHasCellFailed 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:153#UpdateSms                    文件、行号、符号均有效（UpdateSms 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:161#SendBroadcast                文件、行号、符号均有效（SendBroadcast 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:306#StatusReportAnalysis 文件、行号、符号均有效（StatusReportAnalysis 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:330#GetMsgRef            文件、行号、符号均有效（GetMsgRef 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:346#SendSmsAck           文件、行号、符号均有效（SendSmsAck 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:350#OnSmsDeliveryResult  文件、行号、符号均有效（OnSmsDeliveryResult 出现在 ±5 行内）
-[OK]   services/sms/sms_base_message.cpp:478#SplitMessage           文件、行号、符号均有效（SplitMessage 出现在 ±5 行内）
-[OK]   services/sms/sms_base_message.cpp:501#DecodeMessage          文件、行号、符号均有效（DecodeMessage 出现在 ±5 行内）
-[OK]   services/sms/sms_base_message.cpp:287#GetSegmentSize         文件、行号、符号均有效（GetSegmentSize 出现在 ±5 行内）
-[OK]   services/sms/sms_base_message.cpp:312#maxSize                文件、行号、符号均有效（maxSize 出现在 ±5 行内）
-[OK]   services/sms/sms_base_message.cpp:290#multiSegSms7BitLength  文件、行号、符号均有效（multiSegSms7BitLength 出现在 ±5 行内）
-[OK]   services/sms/sms_base_message.cpp:291#multiSegSmsUcs2Length  文件、行号、符号均有效（multiSegSmsUcs2Length 出现在 ±5 行内）
-[OK]   services/sms/sms_base_message.cpp:511#segCount               文件、行号、符号均有效（segCount 出现在 ±5 行内）
-[OK]   services/sms/sms_base_message.cpp:518#SplitMessageUcs2       文件、行号、符号均有效（SplitMessageUcs2 出现在 ±5 行内）
-[OK]   services/sms/include/gsm/gsm_pdu_code_type.h:27#MAX_SEGMENT_NUM 文件、行号、符号均有效（MAX_SEGMENT_NUM 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:86#unSentCellCount       文件、行号、符号均有效（unSentCellCount 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:87#hasCellFailed         文件、行号、符号均有效（hasCellFailed 出现在 ±5 行内）
-[OK]   services/sms/gsm/gsm_sms_sender.cpp:150#SetUnSentCellCount   文件、行号、符号均有效（SetUnSentCellCount 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:383#MSG_SMS_RETRY_DELIVERY       文件、行号、符号均有效（MSG_SMS_RETRY_DELIVERY 出现在 ±5 行内）
-[OK]   services/sms/include/sms_sender.h:111#MAX_SEND_RETRIES       文件、行号、符号均有效（MAX_SEND_RETRIES 出现在 ±5 行内）
-[OK]   services/sms/include/sms_sender.h:112#INITIAL_COUNT          文件、行号、符号均有效（INITIAL_COUNT 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:134#SetPsResendCount             文件、行号、符号均有效（SetPsResendCount 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:35#sendCacheMap_                 文件、行号、符号均有效（sendCacheMap_ 出现在 ±5 行内）
-[OK]   frameworks/js/napi/include/send_callback.h:31#SendCallback   文件、行号、符号均有效（SendCallback 出现在 ±5 行内）
-[OK]   services/sms/include/sms_sender.h:45#TextBasedSmsDelivery    文件、行号、符号均有效（TextBasedSmsDelivery 出现在 ±5 行内）
-[OK]   services/sms/include/sms_sender.h:123#MAX_REPORT_LIST_LIMIT  文件、行号、符号均有效（MAX_REPORT_LIST_LIMIT 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:298#UpdateUnSentCellCount        文件、行号、符号均有效（UpdateUnSentCellCount 出现在 ±5 行内）
-[OK]   services/sms/sms_sender.cpp:242#EXPIRED_TIME                 文件、行号、符号均有效（EXPIRED_TIME 出现在 ±5 行内）
-[OK]   services/sms/include/sms_sender.h:120#EXPIRED_TIME           文件、行号、符号均有效（EXPIRED_TIME 出现在 ±5 行内）
-[OK]   services/sms/sms_persist_helper.cpp                          仅校验文件存在
-[OK]   services/sms/sms_service.cpp                                 仅校验文件存在
-[OK]   services/sms/sms_sender.cpp                                  仅校验文件存在
-[OK]   services/sms/sms_interface_stub.cpp                          仅校验文件存在
-[OK]   bundle.json                                                  仅校验文件存在
+===== 汇报脚本.md =====
+汇总：共 83 个锚点，通过 78，告警 5，失败 0
 
-汇总：共 83 个锚点，通过 83，告警 0，失败 0
+# ---- 精确性复核（关闭 ±5 行窗口）----
+# report.md     102 个带行号锚点，精确命中 102，偏移 0，未命中 0
+# anchors.md     98 个带行号锚点，精确命中  98，偏移 0，未命中 0
+# 汇报脚本.md    69 个带行号锚点，精确命中  69，偏移 0，未命中 0
+# 合计 269 个，全部精确命中
+
+# ---- 图示 ----
+# 5 张 mermaid：全景 / 类图 / 三层职责 / 时序 / 状态机（源文件在 repo/mermaid/）
+
+# ---- 证据分级（oh_level.py --target L2）----
+[未达] L4 研究 —— 对照证据: 基线；重复证据: 3 次
+
+证据等级：L2（用现成日志复现已知行为）
+目标等级：L2 → 已达到

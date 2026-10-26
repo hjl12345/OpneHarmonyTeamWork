@@ -1,0 +1,24 @@
+flowchart TB
+    subgraph P["① 协议层：只懂字节，不懂业务"]
+        P1["SmsServiceProxy<br/>序列化 / 发 IPC"]
+        P2["SmsInterfaceStub<br/>反序列化 / 卡槽校验"]
+    end
+    subgraph B["② 业务层：懂策略，不懂空口"]
+        B1["SmsService<br/>权限 / 落库 / 广播"]
+        B2["SmsInterfaceManager<br/>按卡槽路由"]
+        B3["SmsSendManager<br/>按制式分流"]
+        B4["SmsSender 基类<br/>回执 / 重发 / 缓存"]
+        B5["SmsSendIndexer<br/>在途事务状态"]
+    end
+    subgraph D["③ 设备适配层：只懂怎么发一段"]
+        D1["GsmSmsSender"]
+        D2["CdmaSmsSender"]
+        D3["GsmSmsMessage<br/>编码 / PDU"]
+        D4["SmsBaseMessage<br/>段长 / 切分"]
+    end
+    P1 -->|"IPC"| P2
+    P2 --> B1 --> B2 --> B3 --> B4
+    B4 --> D1
+    B4 --> D2
+    D1 --> D3 --> D4
+    B4 --- B5

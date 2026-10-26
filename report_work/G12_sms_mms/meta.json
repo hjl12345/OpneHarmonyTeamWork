@@ -8,11 +8,24 @@
   "repo": "telephony_sms_mms",
   "source_path": "base/telephony/sms_mms",
   "evidence": {
-    "anchors": 83,
+    "anchors": 103,
     "fail": 0,
     "warn": 0,
-    "level": "L1",
-    "level_note": "纯静态分析，未上机取证，不主张 L2"
+    "anchors_note": "口径为 anchors.md 的 103 条去重锚点（全通过）；report.md 正文 127 处（124 通过 / 3 处文件名告警 / 0 失败）；汇报脚本 103 处（92 通过 / 11 处文件名告警 / 0 失败）",
+    "level": "L2",
+    "level_note": "机检 L2 来自 5.5 节本地运行输出的时间戳与 [INFO] 标记；但 L2 判据是文本正则，无法区分设备日志与本机程序输出，故只主张「L1 结构 + 分片算法级局部复现」，不主张设备侧复现",
+    "repro": {
+      "dir": "repro",
+      "kind": "algorithm-level",
+      "scope": "分片与编码长度计算（GetSegmentSize / SplitMessage / SplitMessageUcs2）",
+      "not_covered": "IPC、RIL 下发、回执聚合、域选择",
+      "output": "repro 目录下的 repro-output.txt，含时间戳与 13 个用例明细"
+    },
+    "knowledge_base": {
+      "source": "仓库主干自带 AGENTS.md + docs/agents/（7 份，752 行）",
+      "note": "不在 7.0 切片内，仅作线索；9 条说法逐条回 7.0 源码核验，1 条反向修正了本报告措辞（4008.json 依赖 SA 4010，故不再断言 RIL 与 SA 同进程）",
+      "extra_anchors": "14 条，记在报告 4.6 与脚本 7.8/8.10，未并入 anchors.md 的 103 条精选口径"
+    }
   },
   "slides": {
     "status": "pending",
